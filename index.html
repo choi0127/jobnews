@@ -10,12 +10,16 @@
   #jobnewsSearch{width:100%;padding:10px 40px 10px 14px;font-size:14px;border:1px solid #ccc;border-radius:6px;box-sizing:border-box}
   .search-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:16px;color:#888;cursor:pointer}
   .hint{font-size:12.5px;color:#888;margin:0 0 18px}
-  .jobnews-item{background:#fff;border:1px solid #e3e8ef;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:16px 18px;margin-bottom:14px}
+  .jobnews-item{background:#fff;border:1px solid #e3e8ef;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);padding:16px 18px;margin-bottom:14px;transition:transform .15s ease,box-shadow .15s ease}
+  .jobnews-item:hover{transform:translateY(-3px);box-shadow:0 6px 16px rgba(0,0,0,.1)}
   .jobnews-item a{font-size:16px;font-weight:bold;color:#123a63;text-decoration:none}
-  .jobnews-item .meta{font-size:12px;color:#888;margin-top:4px}
+  .jobnews-item .meta{font-size:12px;color:#888;margin-top:4px;display:flex;align-items:center;gap:6px}
+  .new-badge{display:inline-block;background:#e0302d;color:#fff;font-size:10px;font-weight:700;border-radius:4px;padding:1px 6px;letter-spacing:.3px}
   .jobnews-item .sum{font-size:14px;color:#333;line-height:1.6;margin-top:6px}
-  .tag{display:inline-block;background:#f0f4fa;color:#2e6fc0;border:1px solid #d7e2f0;border-radius:12px;padding:2px 10px;font-size:11.5px;margin:6px 4px 0 0}
+  .tag{display:inline-block;background:#f0f4fa;color:#2e6fc0;border:1px solid #d7e2f0;border-radius:12px;padding:2px 10px;font-size:11.5px;margin:6px 4px 0 0;cursor:pointer}
+  .tag:hover{background:#dde8fb}
   .empty{display:none;text-align:center;color:#8a94a3;padding:40px 0;font-size:14px}
+  mark{background:#fff27a;color:inherit;border-radius:2px;padding:0 1px}
 </style>
 </head>
 <body>
@@ -29,37 +33,37 @@
       <p><a href="https://theindigo.co.kr/archives/70106" target="_blank">[편집자 시선]① 미국 장애인 서비스, 인력난에 '있어도 못 받는다'</a></p>
       <p class="meta" data-src="더인디고" data-date="2026-10-06"></p>
       <p class="sum">미국 ANCOR의 '2026 직접지원인력 위기 실태' 조사에 따르면 지적·발달장애인 서비스 제공기관 524곳 중 85%가 심각한 인력난을 겪었고, 55%는 신규 의뢰를 거절하고 29%는 기존 서비스를 축소한 것으로 나타났다. 인력난의 배경에는 메디케이드(Medicaid)의 낮은 수가와 재정 압박이 있어 직접지원인력(DSP)에게 경쟁력 있는 임금을 제공하기 어려운 구조적 문제가 자리한다. 제도가 존재해도 전달할 인력이 부족하면 장애인의 권리가 현장에서 멈출 수 있다는 점에서, 서비스 확대가 이어지는 한국에도 접근성 지표 관리의 필요성 등 시사점을 던진다.</p>
-      <p><span class="tag">#장애인서비스</span><span class="tag">#직접지원인력</span><span class="tag">#메디케이드</span><span class="tag">#인력난</span><span class="tag">#서비스접근성</span></p>
+      <p class="tagwrap"><span class="tag">#장애인서비스</span><span class="tag">#직접지원인력</span><span class="tag">#메디케이드</span><span class="tag">#인력난</span><span class="tag">#서비스접근성</span></p>
     </div>
     <div class="jobnews-item">
       <p><a href="https://www.ablenews.co.kr/news/articleView.html?idxno=233574" target="_blank">[알기 쉬운 노동상식26] 이럴 땐 어떻게 해야 하나요? ⑧ 동료 직원이 성적으로 기분 나쁜 말과 행동을 합니다</a></p>
       <p class="meta" data-src="에이블뉴스" data-date="2026-10-06"></p>
       <p class="sum">한국장애인고용공단 고용개발원이 발달장애인을 위해 펴낸 '알기 쉬운 노동상식' 연재 중 직장 내 성희롱 대처법을 다룬 회차다. 동료의 성적 언행으로 불편함을 겪을 경우 회사에 신고하고, 날짜·장소·내용을 구체적으로 진술하며 문자·녹음 등 증거를 제출하고, 회사가 제대로 조사하지 않으면 고용노동청(1350)에 신고해 도움을 받을 수 있다고 안내한다.</p>
-      <p><span class="tag">#발달장애인</span><span class="tag">#직장내성희롱</span><span class="tag">#노동상식</span><span class="tag">#장애인고용</span><span class="tag">#고용노동청</span></p>
+      <p class="tagwrap"><span class="tag">#발달장애인</span><span class="tag">#직장내성희롱</span><span class="tag">#노동상식</span><span class="tag">#장애인고용</span><span class="tag">#고용노동청</span></p>
     </div>
     <div class="jobnews-item">
       <p><a href="https://www.ablenews.co.kr/news/articleView.html?idxno=233692" target="_blank">장애인기업 5000개사 대상 '2025년 기준 장애인기업실태조사' 실시</a></p>
       <p class="meta" data-src="에이블뉴스" data-date="2026-10-06"></p>
       <p class="sum">장애인기업종합지원센터가 연말까지 표본 5000개 장애인기업을 대상으로 '2025년 기준 장애인기업 실태조사'를 실시한다. 전문조사기관 ㈜메트릭스가 방문 조사로 기업 일반·창업·재무·공공기관 납품·정책 현황 등 7개 부문 96개 문항을 조사하며, 결과는 2027년 3월 공표될 예정이다. 이는 장애인기업 육성 정책 수립을 위한 기초 자료로 활용된다.</p>
-      <p><span class="tag">#장애인기업</span><span class="tag">#실태조사</span><span class="tag">#장애인기업종합지원센터</span><span class="tag">#장애인고용</span><span class="tag">#통계조사</span></p>
+      <p class="tagwrap"><span class="tag">#장애인기업</span><span class="tag">#실태조사</span><span class="tag">#장애인기업종합지원센터</span><span class="tag">#장애인고용</span><span class="tag">#통계조사</span></p>
     </div>
     <div class="jobnews-item">
       <p><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE9GcnJoTHhmR1BRNGM4RDRLTFVBamFpNDlHdzl0QUp6YTNDRE1BZHBwZGEyT1VLaS1HMnpOZHprZlFBSk5OSUwxbllSdEg1WENvU0FsS2tYVEJIeWEwMnl4dDZENnQ3NGl1SWc?oc=5" target="_blank">중증장애인생산품, 공공조달 넘어 민간시장으로... 전국 105개 시설 한자리에 - 더버터</a></p>
       <p class="meta" data-src="구글뉴스-장애인고용취업" data-date="2026-10-06"></p>
       <p class="sum">전국 105개 중증장애인 생산시설이 한자리에 모여 중증장애인생산품을 선보이는 행사가 열렸다. 그동안 공공조달 중심이던 중증장애인생산품의 판로를 민간시장으로 확대하려는 노력의 일환이다.</p>
-      <p><span class="tag">#중증장애인생산품</span><span class="tag">#공공조달</span><span class="tag">#민간시장</span><span class="tag">#직업재활</span><span class="tag">#장애인일자리</span></p>
+      <p class="tagwrap"><span class="tag">#중증장애인생산품</span><span class="tag">#공공조달</span><span class="tag">#민간시장</span><span class="tag">#직업재활</span><span class="tag">#장애인일자리</span></p>
     </div>
     <div class="jobnews-item">
       <p><a href="https://news.google.com/rss/articles/CBMibEFVX3lxTFBnRHVJZXVZTGh5MFUwenc5RUtyNGxxZVFiXzh6TnJyV1pDR21jSkFWSVFUVXVGQXhxbzdzMHZ4Qk1iYUx3c2phczluWmFKVFVxYS1KQUFiaUhqMVVDVzNWTTNZM2ptMklsVDlVZA?oc=5" target="_blank">서일대 산학협력단 '굿윌스토어 장애인 취업 연계 프로젝트' 종결평가회 개최.. '8년간 16명 이상 취업/진학 이어져' - 베리타스알파</a></p>
       <p class="meta" data-src="구글뉴스-장애인고용취업" data-date="2026-10-01"></p>
       <p class="sum">서일대 산학협력단이 '굿윌스토어 장애인 취업 연계 프로젝트'의 종결평가회를 개최했다. 이 프로젝트는 8년간 진행되며 16명 이상의 장애인 취업 및 진학 성과를 거둔 것으로 나타났다.</p>
-      <p><span class="tag">#장애인취업</span><span class="tag">#서일대</span><span class="tag">#굿윌스토어</span><span class="tag">#산학협력</span><span class="tag">#직업재활</span></p>
+      <p class="tagwrap"><span class="tag">#장애인취업</span><span class="tag">#서일대</span><span class="tag">#굿윌스토어</span><span class="tag">#산학협력</span><span class="tag">#직업재활</span></p>
     </div>
     <div class="jobnews-item">
       <p><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE80WWw2MTlFbS1JeUdWa0loU1dlVDJsSDdadDRuNXR0Rm15bVVLRFZOdTRQZUNLNC1hRV9aT2UxcjlldlFkQkF0MVZZbkctY2poS1Ywc0NYNGFqcUZLa2pOOU5DRG9BYjR2Q2pna2w5UTVMa0Nl0gF4QVVfeXFMTXNhaExRbmx4QXVLb196bG1qVTF2cHZpZXR6a1JNZ1J5YWNvU2pwSnBULVpxRXhRcVAwV3pfV2JnbEZ1QWxrZG9yUGdlUmdEUGZyYnNCVFphT0RIbUZjUzVFLVoxOHhOaE4zNXlNcDNFZXUxLWJoaXNw?oc=5" target="_blank">한경국립대, 팝업북코리아와 발달장애인 취업·평생교육 협약 - 한국장애인신문</a></p>
       <p class="meta" data-src="구글뉴스-장애인고용취업" data-date="2026-10-01"></p>
       <p class="sum">한경국립대학교가 팝업북코리아와 발달장애인의 취업 및 평생교육을 지원하기 위한 업무협약을 체결했다. 이번 협약을 통해 발달장애인의 직업능력 향상과 교육 기회 확대를 도모할 것으로 기대된다.</p>
-      <p><span class="tag">#발달장애인</span><span class="tag">#장애인취업</span><span class="tag">#평생교육</span><span class="tag">#한경국립대</span><span class="tag">#업무협약</span></p>
+      <p class="tagwrap"><span class="tag">#발달장애인</span><span class="tag">#장애인취업</span><span class="tag">#평생교육</span><span class="tag">#한경국립대</span><span class="tag">#업무협약</span></p>
     </div>
   </div>
   <div class="empty" id="jobnewsEmpty">검색 결과가 없습니다.</div>
@@ -70,23 +74,55 @@
       var metaEl = item.querySelector('.meta');
       var src = metaEl.getAttribute('data-src');
       var date = metaEl.getAttribute('data-date');
-      var text = titleEl.textContent;
-      var m = text.match(/^(.*)\s-\s([^-]+)$/);
-      if (m) {
-        titleEl.textContent = m[1].trim();
-        src = m[2].trim();
-      }
-      metaEl.textContent = src + ' · ' + date;
+      var m = titleEl.textContent.match(/^(.*)\s-\s([^-]+)$/);
+      if (m) { titleEl.textContent = m[1].trim(); src = m[2].trim(); }
+
+      var d = new Date(date);
+      var diffDays = Math.floor((new Date().setHours(0,0,0,0) - d.setHours(0,0,0,0)) / 86400000);
+      var newBadge = diffDays <= 1 ? '<span class="new-badge">NEW</span>' : '';
+
+      metaEl.innerHTML = newBadge + '<span>' + src + ' · ' + date + '</span>';
+
+      item.dataset.titleOrig = titleEl.textContent;
+      item.dataset.sumOrig = item.querySelector('.sum').textContent;
     });
+
+    document.querySelectorAll('.tag').forEach(function (tag) {
+      tag.addEventListener('click', function () {
+        var kw = tag.textContent.replace(/^#/, '');
+        document.getElementById('jobnewsSearch').value = kw;
+        jobnewsFilter();
+      });
+    });
+
+    function highlight(text, input) {
+      if (!input) return text;
+      var idx = text.toLowerCase().indexOf(input.toLowerCase());
+      if (idx === -1) return text;
+      return text.slice(0, idx) + '<mark>' + text.slice(idx, idx + input.length) + '</mark>' + text.slice(idx + input.length);
+    }
 
     function jobnewsFilter() {
       var input = document.getElementById('jobnewsSearch').value.toLowerCase();
       var items = document.getElementById('jobnewsList').getElementsByClassName('jobnews-item');
       var visibleCount = 0;
       for (var i = 0; i < items.length; i++) {
-        var match = items[i].textContent.toLowerCase().indexOf(input) > -1;
-        items[i].style.display = match ? '' : 'none';
+        var item = items[i];
+        var titleOrig = item.dataset.titleOrig;
+        var sumOrig = item.dataset.sumOrig;
+        var match = (titleOrig + ' ' + sumOrig).toLowerCase().indexOf(input) > -1;
+        item.style.display = match ? '' : 'none';
         if (match) visibleCount++;
+
+        var titleEl = item.querySelector('a');
+        var sumEl = item.querySelector('.sum');
+        if (input) {
+          titleEl.innerHTML = highlight(titleOrig, input);
+          sumEl.innerHTML = highlight(sumOrig, input);
+        } else {
+          titleEl.textContent = titleOrig;
+          sumEl.textContent = sumOrig;
+        }
       }
       document.getElementById('jobnewsEmpty').style.display = visibleCount === 0 ? 'block' : 'none';
     }
