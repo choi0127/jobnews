@@ -6,9 +6,10 @@
 <title>장애인 일자리 뉴스</title>
 <style>
   body{font-family:'맑은 고딕',sans-serif;margin:0;padding:16px;background:#fff;color:#1a2330}
-  .search-wrap{position:relative;max-width:500px;margin-bottom:18px}
+  .search-wrap{position:relative;max-width:500px;margin-bottom:8px}
   #jobnewsSearch{width:100%;padding:10px 40px 10px 14px;font-size:14px;border:1px solid #ccc;border-radius:6px;box-sizing:border-box}
-  .search-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:16px;color:#888}
+  .search-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:16px;color:#888;cursor:pointer}
+  .hint{font-size:12.5px;color:#888;margin:0 0 18px}
   .jobnews-item{margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid #ddd}
   .jobnews-item a{font-size:16px;font-weight:bold;color:#123a63;text-decoration:none}
   .jobnews-item .meta{font-size:12px;color:#888;margin-top:4px}
@@ -19,8 +20,9 @@
 <body>
   <div class="search-wrap">
     <input type="text" id="jobnewsSearch" placeholder="제목으로 검색해보세요">
-    <span class="search-icon">🔍</span>
+    <span class="search-icon" id="jobnewsSearchBtn">🔍</span>
   </div>
+  <p class="hint">궁금한 키워드를 검색해보세요. (예: 장애인고용, 직업재활)</p>
   <div id="jobnewsList">
     <div class="jobnews-item">
       <p><a href="https://theindigo.co.kr/archives/70106" target="_blank">[편집자 시선]① 미국 장애인 서비스, 인력난에 '있어도 못 받는다'</a></p>
@@ -60,14 +62,16 @@
     </div>
   </div>
   <script>
-    document.getElementById('jobnewsSearch').addEventListener('keyup', function() {
-      var input = this.value.toLowerCase();
+    function jobnewsFilter() {
+      var input = document.getElementById('jobnewsSearch').value.toLowerCase();
       var items = document.getElementById('jobnewsList').getElementsByClassName('jobnews-item');
       for (var i = 0; i < items.length; i++) {
         var text = items[i].textContent.toLowerCase();
         items[i].style.display = text.indexOf(input) > -1 ? '' : 'none';
       }
-    });
+    }
+    document.getElementById('jobnewsSearch').addEventListener('keyup', jobnewsFilter);
+    document.getElementById('jobnewsSearchBtn').addEventListener('click', jobnewsFilter);
   </script>
 </body>
 </html>
