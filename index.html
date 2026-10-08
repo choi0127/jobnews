@@ -13,19 +13,21 @@
   .search-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:16px;color:#888;cursor:pointer}
   .saved-toggle{flex:0 0 auto;border:1px solid #dbdbdb;background:#efefef;border-radius:20px;padding:0 16px;font-size:13px;cursor:pointer;color:#555;white-space:nowrap}
   .saved-toggle.on{background:#1a56c4;border-color:#1a56c4;color:#fff}
+  .tabs{display:flex;gap:6px;max-width:900px}
+  .tab-btn{border:0;background:none;padding:8px 14px;font-size:14px;font-weight:700;color:#8a94a3;cursor:pointer;border-bottom:3px solid transparent}
+  .tab-btn.active{color:#123a63;border-bottom-color:#123a63}
   .wrap{max-width:900px;margin:14px auto 0;padding:0 10px}
-  .jobnews-item{background:#fff;border:1px solid #efefef;border-radius:14px;margin-bottom:18px;overflow:hidden}
-  .post-head{display:flex;align-items:center;gap:10px;padding:12px 14px}
-  .avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:15px;flex:0 0 auto}
-  .post-head .who{font-size:13.5px;font-weight:700;color:#1a2330}
-  .post-head .when{font-size:11.5px;color:#8a94a3}
+  .jobnews-item{background:#fff;border:1px solid #efefef;border-radius:14px;margin-bottom:18px;overflow:hidden;transition:transform .15s ease,box-shadow .15s ease}
+  .jobnews-item:hover,.jobnews-item:active{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.08)}
   .new-badge{display:inline-block;background:#e0302d;color:#fff;font-size:9.5px;font-weight:700;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:1px}
-  .post-body{padding:0 14px 6px}
+  .post-body{padding:14px 14px 6px}
   .post-body a{font-size:15px;font-weight:700;color:#123a63;text-decoration:none;display:block;margin-bottom:6px}
   .post-body .sum{font-size:13.5px;color:#333;line-height:1.6}
   .tagwrap{padding:4px 14px 2px}
   .tag{display:inline-block;background:#f0f4fa;color:#2e6fc0;border:1px solid #d7e2f0;border-radius:12px;padding:2px 10px;font-size:11px;margin:4px 4px 0 0;cursor:pointer}
   .tag:hover{background:#dde8fb}
+  .meta-foot{padding:10px 14px 0;font-size:11.5px;color:#8a94a3}
+  .meta-foot .who{font-weight:700;color:#5a6472}
   .actions{display:flex;align-items:center;gap:16px;padding:10px 14px 12px;border-top:1px solid #f4f4f4;margin-top:8px}
   .actions button{background:none;border:0;font-size:20px;cursor:pointer;padding:0;line-height:1;color:#333;display:flex;align-items:center;gap:4px}
   .actions button span.label{font-size:12.5px;color:#555}
@@ -43,19 +45,24 @@
       </div>
       <button class="saved-toggle" id="savedToggle">🔖 저장한 글만</button>
     </div>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="all">🗂 전체</button>
+      <button class="tab-btn" data-tab="news">📰 뉴스</button>
+      <button class="tab-btn" data-tab="research">📄 연구자료</button>
+    </div>
   </div>
 
-  <div class="wrap" id="jobnewsList">
+  <div class="wrap" id="allList"></div>
+  <div class="empty" id="allEmpty">검색 결과가 없습니다.</div>
+
+  <div class="wrap" id="jobnewsList" style="display:none">
     <div class="jobnews-item" data-url="https://theindigo.co.kr/archives/70106">
-      <div class="post-head">
-        <div class="avatar" style="background:#2e6fc0">더</div>
-        <div><div class="who">더인디고</div><div class="when" data-date="2026-10-06"></div></div>
-      </div>
       <div class="post-body">
         <a href="https://theindigo.co.kr/archives/70106" target="_blank">[편집자 시선]① 미국 장애인 서비스, 인력난에 '있어도 못 받는다'</a>
         <p class="sum">미국 ANCOR의 '2026 직접지원인력 위기 실태' 조사에 따르면 지적·발달장애인 서비스 제공기관 524곳 중 85%가 심각한 인력난을 겪었고, 55%는 신규 의뢰를 거절하고 29%는 기존 서비스를 축소한 것으로 나타났다. 인력난의 배경에는 메디케이드(Medicaid)의 낮은 수가와 재정 압박이 있어 직접지원인력(DSP)에게 경쟁력 있는 임금을 제공하기 어려운 구조적 문제가 자리한다. 제도가 존재해도 전달할 인력이 부족하면 장애인의 권리가 현장에서 멈출 수 있다는 점에서, 서비스 확대가 이어지는 한국에도 접근성 지표 관리의 필요성 등 시사점을 던진다.</p>
       </div>
-      <div class="tagwrap"><span class="tag">#장애인서비스</span><span class="tag">#직접지원인력</span><span class="tag">#메디케이드</span><span class="tag">#인력난</span><span class="tag">#서비스접근성</span></div>
+    <div class="tagwrap"><span class="tag">#장애인서비스</span><span class="tag">#직접지원인력</span><span class="tag">#메디케이드</span><span class="tag">#인력난</span><span class="tag">#서비스접근성</span></div>
+    <div class="meta-foot"><span class="who">더인디고</span> · <span class="when" data-date="2026-10-06"></span></div>
       <div class="actions">
         <button class="share-btn">📤 <span class="label">공유</span></button>
         <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
@@ -63,15 +70,12 @@
     </div>
 
     <div class="jobnews-item" data-url="https://www.ablenews.co.kr/news/articleView.html?idxno=233574">
-      <div class="post-head">
-        <div class="avatar" style="background:#1c7e38">에</div>
-        <div><div class="who">에이블뉴스</div><div class="when" data-date="2026-10-06"></div></div>
-      </div>
       <div class="post-body">
         <a href="https://www.ablenews.co.kr/news/articleView.html?idxno=233574" target="_blank">[알기 쉬운 노동상식26] 이럴 땐 어떻게 해야 하나요? ⑧ 동료 직원이 성적으로 기분 나쁜 말과 행동을 합니다</a>
         <p class="sum">한국장애인고용공단 고용개발원이 발달장애인을 위해 펴낸 '알기 쉬운 노동상식' 연재 중 직장 내 성희롱 대처법을 다룬 회차다. 동료의 성적 언행으로 불편함을 겪을 경우 회사에 신고하고, 날짜·장소·내용을 구체적으로 진술하며 문자·녹음 등 증거를 제출하고, 회사가 제대로 조사하지 않으면 고용노동청(1350)에 신고해 도움을 받을 수 있다고 안내한다.</p>
       </div>
-      <div class="tagwrap"><span class="tag">#발달장애인</span><span class="tag">#직장내성희롱</span><span class="tag">#노동상식</span><span class="tag">#장애인고용</span><span class="tag">#고용노동청</span></div>
+    <div class="tagwrap"><span class="tag">#발달장애인</span><span class="tag">#직장내성희롱</span><span class="tag">#노동상식</span><span class="tag">#장애인고용</span><span class="tag">#고용노동청</span></div>
+    <div class="meta-foot"><span class="who">에이블뉴스</span> · <span class="when" data-date="2026-10-06"></span></div>
       <div class="actions">
         <button class="share-btn">📤 <span class="label">공유</span></button>
         <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
@@ -79,15 +83,12 @@
     </div>
 
     <div class="jobnews-item" data-url="https://www.ablenews.co.kr/news/articleView.html?idxno=233692">
-      <div class="post-head">
-        <div class="avatar" style="background:#1c7e38">에</div>
-        <div><div class="who">에이블뉴스</div><div class="when" data-date="2026-10-06"></div></div>
-      </div>
       <div class="post-body">
         <a href="https://www.ablenews.co.kr/news/articleView.html?idxno=233692" target="_blank">장애인기업 5000개사 대상 '2025년 기준 장애인기업실태조사' 실시</a>
         <p class="sum">장애인기업종합지원센터가 연말까지 표본 5000개 장애인기업을 대상으로 '2025년 기준 장애인기업 실태조사'를 실시한다. 전문조사기관 ㈜메트릭스가 방문 조사로 기업 일반·창업·재무·공공기관 납품·정책 현황 등 7개 부문 96개 문항을 조사하며, 결과는 2027년 3월 공표될 예정이다. 이는 장애인기업 육성 정책 수립을 위한 기초 자료로 활용된다.</p>
       </div>
-      <div class="tagwrap"><span class="tag">#장애인기업</span><span class="tag">#실태조사</span><span class="tag">#장애인기업종합지원센터</span><span class="tag">#장애인고용</span><span class="tag">#통계조사</span></div>
+    <div class="tagwrap"><span class="tag">#장애인기업</span><span class="tag">#실태조사</span><span class="tag">#장애인기업종합지원센터</span><span class="tag">#장애인고용</span><span class="tag">#통계조사</span></div>
+    <div class="meta-foot"><span class="who">에이블뉴스</span> · <span class="when" data-date="2026-10-06"></span></div>
       <div class="actions">
         <button class="share-btn">📤 <span class="label">공유</span></button>
         <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
@@ -95,15 +96,12 @@
     </div>
 
     <div class="jobnews-item" data-url="https://news.google.com/rss/articles/CBMiakFVX3lxTE9GcnJoTHhmR1BRNGM4RDRLTFVBamFpNDlHdzl0QUp6YTNDRE1BZHBwZGEyT1VLaS1HMnpOZHprZlFBSk5OSUwxbllSdEg1WENvU0FsS2tYVEJIeWEwMnl4dDZENnQ3NGl1SWc?oc=5">
-      <div class="post-head">
-        <div class="avatar" style="background:#b35b00">더</div>
-        <div><div class="who">더버터</div><div class="when" data-date="2026-10-06"></div></div>
-      </div>
       <div class="post-body">
         <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE9GcnJoTHhmR1BRNGM4RDRLTFVBamFpNDlHdzl0QUp6YTNDRE1BZHBwZGEyT1VLaS1HMnpOZHprZlFBSk5OSUwxbllSdEg1WENvU0FsS2tYVEJIeWEwMnl4dDZENnQ3NGl1SWc?oc=5" target="_blank">중증장애인생산품, 공공조달 넘어 민간시장으로... 전국 105개 시설 한자리에</a>
         <p class="sum">전국 105개 중증장애인 생산시설이 한자리에 모여 중증장애인생산품을 선보이는 행사가 열렸다. 그동안 공공조달 중심이던 중증장애인생산품의 판로를 민간시장으로 확대하려는 노력의 일환이다.</p>
       </div>
-      <div class="tagwrap"><span class="tag">#중증장애인생산품</span><span class="tag">#공공조달</span><span class="tag">#민간시장</span><span class="tag">#직업재활</span><span class="tag">#장애인일자리</span></div>
+    <div class="tagwrap"><span class="tag">#중증장애인생산품</span><span class="tag">#공공조달</span><span class="tag">#민간시장</span><span class="tag">#직업재활</span><span class="tag">#장애인일자리</span></div>
+    <div class="meta-foot"><span class="who">더버터</span> · <span class="when" data-date="2026-10-06"></span></div>
       <div class="actions">
         <button class="share-btn">📤 <span class="label">공유</span></button>
         <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
@@ -111,15 +109,12 @@
     </div>
 
     <div class="jobnews-item" data-url="https://news.google.com/rss/articles/CBMibEFVX3lxTFBnRHVJZXVZTGh5MFUwenc5RUtyNGxxZVFiXzh6TnJyV1pDR21jSkFWSVFUVXVGQXhxbzdzMHZ4Qk1iYUx3c2phczluWmFKVFVxYS1KQUFiaUhqMVVDVzNWTTNZM2ptMklsVDlVZA?oc=5">
-      <div class="post-head">
-        <div class="avatar" style="background:#b35b00">베</div>
-        <div><div class="who">베리타스알파</div><div class="when" data-date="2026-10-01"></div></div>
-      </div>
       <div class="post-body">
         <a href="https://news.google.com/rss/articles/CBMibEFVX3lxTFBnRHVJZXVZTGh5MFUwenc5RUtyNGxxZVFiXzh6TnJyV1pDR21jSkFWSVFUVXVGQXhxbzdzMHZ4Qk1iYUx3c2phczluWmFKVFVxYS1KQUFiaUhqMVVDVzNWTTNZM2ptMklsVDlVZA?oc=5" target="_blank">서일대 산학협력단 '굿윌스토어 장애인 취업 연계 프로젝트' 종결평가회 개최.. '8년간 16명 이상 취업/진학 이어져'</a>
         <p class="sum">서일대 산학협력단이 '굿윌스토어 장애인 취업 연계 프로젝트'의 종결평가회를 개최했다. 이 프로젝트는 8년간 진행되며 16명 이상의 장애인 취업 및 진학 성과를 거둔 것으로 나타났다.</p>
       </div>
-      <div class="tagwrap"><span class="tag">#장애인취업</span><span class="tag">#서일대</span><span class="tag">#굿윌스토어</span><span class="tag">#산학협력</span><span class="tag">#직업재활</span></div>
+    <div class="tagwrap"><span class="tag">#장애인취업</span><span class="tag">#서일대</span><span class="tag">#굿윌스토어</span><span class="tag">#산학협력</span><span class="tag">#직업재활</span></div>
+    <div class="meta-foot"><span class="who">베리타스알파</span> · <span class="when" data-date="2026-10-01"></span></div>
       <div class="actions">
         <button class="share-btn">📤 <span class="label">공유</span></button>
         <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
@@ -127,15 +122,12 @@
     </div>
 
     <div class="jobnews-item" data-url="https://news.google.com/rss/articles/CBMidEFVX3lxTE80WWw2MTlFbS1JeUdWa0loU1dlVDJsSDdadDRuNXR0Rm15bVVLRFZOdTRQZUNLNC1hRV9aT2UxcjlldlFkQkF0MVZZbkctY2poS1Ywc0NYNGFqcUZLa2pOOU5DRG9BYjR2Q2pna2w5UTVMa0Nl0gF4QVVfeXFMTXNhaExRbmx4QXVLb196bG1qVTF2cHZpZXR6a1JNZ1J5YWNvU2pwSnBULVpxRXhRcVAwV3pfV2JnbEZ1QWxrZG9yUGdlUmdEUGZyYnNCVFphT0RIbUZjUzVFLVoxOHhOaE4zNXlNcDNFZXUxLWJoaXNw?oc=5">
-      <div class="post-head">
-        <div class="avatar" style="background:#b35b00">한</div>
-        <div><div class="who">한국장애인신문</div><div class="when" data-date="2026-10-01"></div></div>
-      </div>
       <div class="post-body">
         <a href="https://news.google.com/rss/articles/CBMidEFVX3lxTE80WWw2MTlFbS1JeUdWa0loU1dlVDJsSDdadDRuNXR0Rm15bVVLRFZOdTRQZUNLNC1hRV9aT2UxcjlldlFkQkF0MVZZbkctY2poS1Ywc0NYNGFqcUZLa2pOOU5DRG9BYjR2Q2pna2w5UTVMa0Nl0gF4QVVfeXFMTXNhaExRbmx4QXVLb196bG1qVTF2cHZpZXR6a1JNZ1J5YWNvU2pwSnBULVpxRXhRcVAwV3pfV2JnbEZ1QWxrZG9yUGdlUmdEUGZyYnNCVFphT0RIbUZjUzVFLVoxOHhOaE4zNXlNcDNFZXUxLWJoaXNw?oc=5" target="_blank">한경국립대, 팝업북코리아와 발달장애인 취업·평생교육 협약</a>
         <p class="sum">한경국립대학교가 팝업북코리아와 발달장애인의 취업 및 평생교육을 지원하기 위한 업무협약을 체결했다. 이번 협약을 통해 발달장애인의 직업능력 향상과 교육 기회 확대를 도모할 것으로 기대된다.</p>
       </div>
-      <div class="tagwrap"><span class="tag">#발달장애인</span><span class="tag">#장애인취업</span><span class="tag">#평생교육</span><span class="tag">#한경국립대</span><span class="tag">#업무협약</span></div>
+    <div class="tagwrap"><span class="tag">#발달장애인</span><span class="tag">#장애인취업</span><span class="tag">#평생교육</span><span class="tag">#한경국립대</span><span class="tag">#업무협약</span></div>
+    <div class="meta-foot"><span class="who">한국장애인신문</span> · <span class="when" data-date="2026-10-01"></span></div>
       <div class="actions">
         <button class="share-btn">📤 <span class="label">공유</span></button>
         <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
@@ -143,11 +135,715 @@
     </div>
   </div>
   <div class="empty" id="jobnewsEmpty">검색 결과가 없습니다.</div>
+<div id="researchList" class="wrap" style="display:none">
+  <div class="jobnews-item" data-url="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003388833">
+    <div class="post-body">
+      <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003388833" target="_blank">직업재활을 준비하는 장애인이 지각한 재활운동 지도자의 지도행동유형이 진로결정 및 자아존중감에 미치는 영향</a>
+      <p class="sum">직업재활을 준비하는 장애인 513명을 대상으로 재활운동 지도자의 지도행동유형이 진로결정과 자아존중감에 미치는 영향을 구조방정식모형으로 분석한 연구이다. 지도행동유형은 진로결정과 자아존중감에 유의한 영향을 미쳤고, 진로결정 역시 자아존중감에 유의한 영향을 주는 것으로 나타났다. 이에 따라 재활운동 지도자의 전문성 강화와 장애인 맞춤형 재활운동 지도프로그램 개발의 필요성이 제시되었다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#직업재활</span>
+      <span class="tag">#장애인재활운동</span>
+      <span class="tag">#진로결정</span>
+      <span class="tag">#자아존중감</span>
+      <span class="tag">#지도행동유형</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(직업재활)</span> · <span class="when" data-date="2026-10-07"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003385993">
+    <div class="post-body">
+      <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003385993" target="_blank">알코올사용장애 대상자를 위한 통합형 직업재활센터의 역할과 가치에 대한 지역사회 관련기관 실무자의 인식: 해석적 기술연구</a>
+      <p class="sum">알코올사용장애 대상자를 위한 통합형 직업재활센터의 역할과 가치를 지역사회 관련기관 실무자 10명을 대상으로 한 포커스그룹 인터뷰로 분석한 해석적 기술연구이다. 분석 결과 &#039;일을 통한 회복 가능성의 확장&#039;, &#039;직업재활을 가로막는 장벽 경험&#039;, &#039;함께해야 변화가 가능함을 깨달음&#039;이라는 3개 주제가 도출되었으며, 해당 센터는 치료·직업재활·지역사회 자원을 통합한 회복지향적 지원체계로 인식되었다. 향후 서비스는 고용 성과뿐 아니라 지속적 회복과 지역사회 통합을 강화하는 방향으로 나아가야 한다고 제언했다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#직업재활</span>
+      <span class="tag">#알코올사용장애</span>
+      <span class="tag">#통합형직업재활센터</span>
+      <span class="tag">#지역사회정신건강</span>
+      <span class="tag">#질적연구</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(직업재활)</span> · <span class="when" data-date="2026-09-30"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://doi.org/10.31409/KJSWE.2026.73.3.123">
+    <div class="post-body">
+      <a href="https://doi.org/10.31409/KJSWE.2026.73.3.123" target="_blank">장애인고용 기업체의 장애인 고용률에 미치는 영향: 베타회귀모형의 적용을 중심으로</a>
+      <p class="sum">본 연구는 2024년 기업체 장애인고용실태조사 자료에 베타회귀모형을 적용하여 기업의 장애인 고용률에 영향을 미치는 기업특성·고용인식·업무근무환경 요인을 분석했다. 서비스업, 긍정적 고용 반응, CSR 인식, 맞춤형 업무환경은 고용률을 높인 반면 대도시 소재, 기업 규모, 비용 인식, 경직된 근무환경은 음의 영향을 미쳤다. 이를 토대로 직무 재설계, 의무고용률 초과 기업 단계별 유인체계, 유연근무제 인센티브 등 노동수요 맞춤형 정책을 제언했다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#고용률</span>
+      <span class="tag">#베타회귀모형</span>
+      <span class="tag">#직업재활</span>
+      <span class="tag">#근무환경</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(장애인고용)</span> · <span class="when" data-date="2026-09-30"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType01.do?bid=1&amp;mid=21&amp;cmd=_view&amp;idx=42450">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType01.do?bid=1&amp;mid=21&amp;cmd=_view&amp;idx=42450" target="_blank">Disability Statistics at a Glance 2026</a>
+      <p class="sum">한국장애인고용공단 고용개발원 조사통계부가 장애인 통계의 국제자료 활용도를 높이기 위해 &#039;한눈에 보는 2026 장애인 통계&#039;의 영문판인 &#039;Disability Statistics at a Glance 2026&#039;(96면)을 2026년 9월 발행했다. 등록 장애인 현황, 경제활동 및 기업체 고용 상황, 의무고용률 이행, 발달장애인의 일과 삶, 주요국(일본·독일·미국) 장애인 통계 등이 담겨 있다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인통계</span>
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#고용개발원</span>
+      <span class="tag">#영문판통계</span>
+      <span class="tag">#장애인경제활동</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-09-30"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003381487">
+    <div class="post-body">
+      <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003381487" target="_blank">코칭리더십 및 자기효능감과 장애인직업재활시설 종사자의 자기주도행동 간 구조적 관계 : 직무열의의 매개역할 검증</a>
+      <p class="sum">전국 8개 지역 장애인직업재활시설 종사자 302명을 대상으로 코칭리더십과 자기효능감이 자기주도행동에 미치는 관계를 구조방정식모형으로 분석한 연구이다. 분석 결과 코칭리더십과 자기효능감 모두 자기주도행동과 유의한 정(+)적 관련성을 가졌으며, 직무열의를 경유한 간접 관련성도 확인되었다. 다만 횡단자료 기반이라 인과관계를 입증하는 것은 아니며, 이를 토대로 학술적·정책적 함의를 제시하였다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인직업재활시설</span>
+      <span class="tag">#코칭리더십</span>
+      <span class="tag">#자기효능감</span>
+      <span class="tag">#직무열의</span>
+      <span class="tag">#자기주도행동</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(직업재활)</span> · <span class="when" data-date="2026-09-17"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType01.do?bid=38&amp;mid=226&amp;cmd=_view&amp;idx=42205">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType01.do?bid=38&amp;mid=226&amp;cmd=_view&amp;idx=42205" target="_blank">장애인 고용부담금의 국제비교: 부담수준과 운영방식을 중심으로</a>
+      <p class="sum">이 연구는 주요국의 장애인 고용부담금 수준과 운영방식을 비교하고, 의무고용률 및 장애인 인정범위 등 제도적 차이를 분석했다. 이를 바탕으로 국내 장애인 고용부담금 제도에 대한 시사점을 도출했다. 한국장애인고용공단 고용개발원이 발간한 이슈 브리프(2026-03, 박혜원)이다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#고용부담금</span>
+      <span class="tag">#국제비교</span>
+      <span class="tag">#의무고용률</span>
+      <span class="tag">#고용정책</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-09-17"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003374880">
+    <div class="post-body">
+      <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003374880" target="_blank">한국 직업재활 성과측정 체계의 재고찰: 미국·영국·호주의 성과관리 및 지표설계 비교를 중심으로</a>
+      <p class="sum">이 연구는 한국 장애인 직업재활 프로그램이 양적으로 확대되었으나 통합 성과측정 체계가 없어 부처 간 비교와 효과성 평가가 어렵다는 문제의식에서, 미국·영국·호주의 성과관리 방식을 여섯 개 차원으로 비교분석했다. 미국은 정교한 지표 운영에도 재정연계가 제한적이고, 영국은 성과보상 연계, 호주는 복수 기준 체계로 재편 중이며 세 국가 모두 지속 고용·사회적 가치로 성과 개념을 확대하지만 공식 지표에는 충분히 반영되지 못했다. 이를 토대로 직업재활의 사회적 투자 재개념화, 부처 간 공통 성과지표 구축, 참여형 평가 전환 등 다섯 가지 방향을 제안했다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#직업재활</span>
+      <span class="tag">#성과측정</span>
+      <span class="tag">#성과관리</span>
+      <span class="tag">#비교정책분석</span>
+      <span class="tag">#장애인고용</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(직업재활)</span> · <span class="when" data-date="2026-08-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003374894">
+    <div class="post-body">
+      <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003374894" target="_blank">장애인 육아휴직과 장애인고용부담금 부과: 현황과 제도적 함의</a>
+      <p class="sum">이 연구는 2022~2024년 장애인 육아휴직 행정자료를 구축해 사용 현황을 분석하고, 육아휴직에 따른 장애인고용부담금 규모를 비모수 추정 등으로 추계했다. 연간 약 900명(전체 장애인 근로자의 0.4%)이 육아휴직을 사용했으며 남성·경증장애인·대규모 사업체에 집중되었고, 추가 부담금은 연간 약 48억 원으로 전체 재정의 1% 미만이지만 개별 사업체에는 실질적 부담이 된다. 이에 육아휴직 관련 부담금 감면 등 장애인고용정책과 일·가정 양립정책의 조화로운 연계를 위한 제도개선이 필요하다고 제언한다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인육아휴직</span>
+      <span class="tag">#장애인고용부담금</span>
+      <span class="tag">#장애인고용의무제도</span>
+      <span class="tag">#일가정양립</span>
+      <span class="tag">#직업재활</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(장애인고용)</span> · <span class="when" data-date="2026-08-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42151">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42151" target="_blank">일하는 발달장애 자녀를 둔 부모의 경험에 관한 질적 연구: 자녀의 취업과 이후의 직장생활을 중심으로</a>
+      <p class="sum">성인 발달장애 자녀를 둔 부모 16명을 심층 인터뷰하여 자녀의 취업과 직장생활 과정에서 부모가 겪는 경험을 질적으로 분석한 연구이다. 부모는 자녀의 취업을 위해 적극 개입하고 취업 이후에도 관리·조정을 이어갔으며, 자녀의 취업으로 경제적 부담 완화와 자기 돌봄의 여유를 얻고 자녀의 자립 가능성을 엿보았다고 밝혔다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#발달장애</span>
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#직업재활</span>
+      <span class="tag">#부모경험</span>
+      <span class="tag">#질적연구</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-08-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42152">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42152" target="_blank">Rethinking Vocational Rehabilitation Performance Measurement in Korea: A Comparative Analysis of Performance Governance and Indicator Design in  the United States, the United Kingdom, and Australia</a>
+      <p class="sum">한국의 직업재활 프로그램이 규모 면에서 크게 성장했음에도 통합 성과측정 체계가 부재해 부처 간 비교와 효과성 평가, 서비스 질 개선이 제약된다는 문제의식에서 미국·영국·호주의 성과측정 접근을 비교 분석한 연구이다. 전달체계, 성과 거버넌스, 성과지표, 성과-재정 연계 등 6개 차원으로 세 나라를 검토한 결과, 지속가능한 고용과 사회적 가치로 성과 개념이 확장되었으나 이러한 확장이 실제 행정적 효력을 갖는 지표에는 반영되지 못함을 확인했다. 연구는 직업재활을 사회투자로 재개념화하고 부처 공통지표와 이를 설정할 기구를 마련하는 등 한국 평가체계 강화를 위한 다섯 가지 방향을 제안한다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#직업재활</span>
+      <span class="tag">#성과측정</span>
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#비교정책분석</span>
+      <span class="tag">#평가체계</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-08-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42153">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42153" target="_blank">중장년 지체장애인의 대인관계능력에 영향을 미치는 사회적 요인 연구</a>
+      <p class="sum">이 연구는 2023년 장애인고용패널 자료를 활용해 만 40~64세 중장년 지체장애인 1,263명을 대상으로 사회적 요인이 대인관계능력에 미치는 영향을 분석했다. 분석 결과 경제활동상태가 대인관계능력과 가장 밀접한 핵심 요인으로 나타났으며, 주관적 사회경제적 지위, 사회활동 참여 정도, 최종학력, 배우자 유무도 유의미한 관련성을 보였다. 연구진은 대인관계능력이 경제활동 및 사회참여와의 상호작용을 통해 형성되는 사회적 성취임을 확인하고, 실질적 환경과 기회 제공에 집중하는 정책적 접근을 제언했다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#지체장애인</span>
+      <span class="tag">#대인관계능력</span>
+      <span class="tag">#경제활동</span>
+      <span class="tag">#사회참여</span>
+      <span class="tag">#장애인고용패널</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-08-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42155">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42155" target="_blank">학습중심 현장실습 확대·활성화 이후 전공과의 직업교육 및 취업지원에 관한 국내 연구 동향과 과제</a>
+      <p class="sum">이 연구는 2019~2025년 KCI 등재 논문 20편을 대상으로 학습중심 현장실습 확대 이후 특수학교 전공과의 직업교육 및 취업지원 연구 동향을 빈도분석과 내용분석으로 살펴보았다. 연구는 2020~2022년에 집중되었고 직업교육 분야가 가장 많았으나, 실제 취업·고용성과를 측정하지 않은 연구가 65%, 고용의 질을 다룬 연구는 25%에 그쳤다. 전공과 졸업생의 장기적 취업·고용유지 추적과 임금·직무적합성·직업만족도 등 고용의 질 지표 활용의 필요성을 제언했다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#전공과</span>
+      <span class="tag">#직업교육</span>
+      <span class="tag">#현장실습</span>
+      <span class="tag">#취업지원</span>
+      <span class="tag">#고용의질</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-08-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42156">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42156" target="_blank">장애인 고용서비스에 대한 인식이 불리한 취업조건 수용성에 미치는 영향: 장애인 정책신뢰도의 매개효과와 자기효능감에 의한 조절된 매개효과</a>
+      <p class="sum">장애인고용패널조사 2차웨이브 8차 자료(장애인 2,160명)를 활용해 장애인 고용서비스 인식이 불리한 취업조건 수용성에 미치는 영향을 분석한 연구이다. 정책신뢰도가 둘 사이를 완전매개했으며, 자기효능감에 따른 조절된 매개효과도 검증되었다. 이를 바탕으로 고용서비스의 질적 개선과 권리기반적 일자리 선택을 가능케 하는 심리적 자원으로서 자기효능감 강화를 제언하였다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#고용서비스</span>
+      <span class="tag">#정책신뢰도</span>
+      <span class="tag">#자기효능감</span>
+      <span class="tag">#장애인고용패널조사</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-08-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42157">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42157" target="_blank">장애인 예비교원과 장애학생지원센터 실무진의 현장실습 경험과 지원 요구: 양성기관-실습학교 간 지원 연계를 중심으로</a>
+      <p class="sum">장애인 예비교원 5명과 장애학생지원센터 담당자 3명을 면담하여 현장실습 경험과 지원 요구를 탐색한 연구로, 양성기관-실습학교 간 지원 연계 체계 구축 방안을 모색했다. 두 집단 모두 지원 공백과 통합적 지원체계의 부재를 문제로 인식했으며, 연구진은 실습학교 배정의 공적 보장, 근로지원인 제도의 양성 단계 확대, 대학 내 통합 지원체계 구축을 제언했다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인예비교원</span>
+      <span class="tag">#현장실습</span>
+      <span class="tag">#장애학생지원센터</span>
+      <span class="tag">#근로지원인</span>
+      <span class="tag">#직업재활</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-08-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42158">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42158" target="_blank">발달장애인의 자기결정적 취업과 직무만족: 당사자 자기응답과 보호자 대리응답의 비교</a>
+      <p class="sum">자기결정이론의 자율성 관점에서 발달장애인의 취업동기·취업의향과 주관적 직무만족의 관련성을 분석하고, 동일 구성개념에 대한 당사자 자기응답과 보호자 대리응답을 비교한 연구다. 「발달장애인 일과 삶 실태조사」 2022~2024년 통합자료 1,962명을 분석한 결과, 타율적 동기는 직무만족과 부적, 취업의향은 정적 관련성을 보였으며 자기응답과 대리응답 간 일치도는 낮았다. 직무만족 관련요인도 응답 주체에 따라 달라, 주관적 구성개념 평가 시 당사자 자기응답을 우선 활용할 필요가 있음을 시사한다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#발달장애인</span>
+      <span class="tag">#자기결정</span>
+      <span class="tag">#직무만족</span>
+      <span class="tag">#취업동기</span>
+      <span class="tag">#자기응답대리응답</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-08-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42159">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42159" target="_blank">장애인 사회복지사가 실천 현장에서 겪는 차별과  대응 방식에 관한 연구</a>
+      <p class="sum">이 연구는 장애인 사회복지사 7명을 심층 면담해 사회복지 실천 현장에서 겪는 차별 양상과 대응 과정을 귀납적 주제분석으로 탐색했다. 분석 결과 이들은 비장애인 중심 교육·고용 구조로 인한 현장실습·채용의 구조적 장벽과 현장 진입 이후의 제도적·인식적 배제를 경험했으며, 차별에 저항하거나 당사자 경험을 전문성으로 활용하는 한편 고용 불안으로 자기검열·회피를 통해 적응했다. 연구는 장애인 사회복지사의 현장 진입과 근무 지속을 위한 제도적·조직적 개선과 장애 포용적 현장 조성이 필요함을 제언했다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인사회복지사</span>
+      <span class="tag">#직장내차별</span>
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#직업재활</span>
+      <span class="tag">#장애포용</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-08-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42160">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42160" target="_blank">발달장애인에 대한 돌봄 공백이 행복에 미치는 영향: 당사자가 인지하는 가족관계와 자아존중감의 이중매개효과를 중심으로</a>
+      <p class="sum">이 연구는 발달장애인 당사자 관점에서 돌봄 공백이 행복에 미치는 영향과 가족관계·자아존중감의 순차적 매개효과를 분석했다. 2024년 발달장애인 일과 삶 실태조사 905명 데이터를 PROCESS Macro Model 6로 분석한 결과, 돌봄 공백은 행복에 부적 영향을 미쳤고 가족관계와 자아존중감이 순차적으로 이를 매개했다. 이를 바탕으로 돌봄 공백 해소와 가족관계 개선, 자아존중감 향상을 위한 정책적·실천적 제언을 제시했다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#발달장애인</span>
+      <span class="tag">#돌봄공백</span>
+      <span class="tag">#가족관계</span>
+      <span class="tag">#자아존중감</span>
+      <span class="tag">#행복</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-08-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42161">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42161" target="_blank">장애인의 세대 내 소득이동: 노동소득 변화와 공적이전의 역할</a>
+      <p class="sum">한국복지패널 5차(2009년)와 20차(2024년) 자료를 활용해 장애여부와 생애주기에 따른 세대 내 소득이동을 분석한 연구이다. 장애인은 소득이동이 낮고 하위분위 고착이 두드러졌으며, 특히 중도장애인과 중년에서 노년기로의 이행에서 소득지위 하락이 뚜렷했다. 장애인의 소득 상향·유지에는 공적·사적이전의 역할이 컸으나 하향 집단에서는 공적이전이 노동소득 감소를 충분히 완충하지 못해, 생애주기별 공적이전 설계와 소득보장이 함께 필요함을 제언한다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인소득이동</span>
+      <span class="tag">#공적이전</span>
+      <span class="tag">#노동소득</span>
+      <span class="tag">#중도장애인</span>
+      <span class="tag">#소득보장</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-08-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42162">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42162" target="_blank">지체 및 뇌병변장애 임금근로자의 일상생활활동 수행능력(activities of daily living)과 직장 편의시설 설치 수준이 직무만족도에 미치는 영향</a>
+      <p class="sum">제2차 장애인고용패널조사 8차(2023년) 자료의 지체 및 뇌병변장애 임금근로자 794명을 대상으로 일상생활활동(ADL) 수행능력과 직장 편의시설 설치 지수가 직무만족도에 미치는 영향을 위계적 다중회귀분석으로 분석한 연구이다. 분석 결과 편의시설 설치 지수는 직무만족도와 유의한 정적 관련성을 보였으나 ADL 수행능력과 그 상호작용항은 유의하지 않았다. 이는 장애인의 직무만족도 향상을 위해 신체 기능 개선뿐 아니라 직장 내 편의시설 확충 등 근무환경 개선과 사업주 지원정책 확대가 병행되어야 함을 시사한다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#직무만족도</span>
+      <span class="tag">#직장편의시설</span>
+      <span class="tag">#일상생활활동</span>
+      <span class="tag">#장애인고용패널조사</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-08-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42165">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=42165" target="_blank">장애인 육아휴직과 장애인고용부담금 부과: 현황과 제도적 함의</a>
+      <p class="sum">장애인 육아휴직 사용 현황과 특성을 분석하고 이에 따른 장애인고용부담금 규모와 향후 변화를 추계한 연구다. 장애인 육아휴직자는 연간 약 900명(전체 장애인 근로자의 0.4%)으로 남성·경증·대규모 사업체에 집중되었으며, 육아휴직으로 인한 추가 부담금은 연간 약 48억 원으로 전체 재정의 1% 미만이나 개별 사업체에는 실질적 부담이 되었다. 연구는 육아휴직 부담금 감면 등 제도개선을 통해 장애인고용정책과 일·가정 양립정책의 조화로운 연계가 필요함을 제언한다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인육아휴직</span>
+      <span class="tag">#장애인고용부담금</span>
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#일가정양립</span>
+      <span class="tag">#고용정책</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-08-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType01.do?bid=1&amp;mid=21&amp;cmd=_view&amp;idx=42010">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType01.do?bid=1&amp;mid=21&amp;cmd=_view&amp;idx=42010" target="_blank">한눈에 보는 2026 장애인 통계</a>
+      <p class="sum">한국장애인고용공단 고용개발원이 발간한 &#039;한눈에 보는 2026 장애인 통계&#039; 보고서로, 등록장애인 현황, 경제활동, 기업체 고용, 의무고용 이행, 고용서비스 욕구, 발달장애인 일과 삶, 복지 및 주요국 통계 등을 주제별로 정리했다. 정책입안자와 연구자 등 수요자가 양질의 통계 정보를 쉽게 활용할 수 있도록 인포그래픽을 통해 접근성과 이해도를 높였다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인통계</span>
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#의무고용</span>
+      <span class="tag">#발달장애인</span>
+      <span class="tag">#고용개발원</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-08-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003362893">
+    <div class="post-body">
+      <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003362893" target="_blank">기업의 장애인 직업능력개발훈련 활용 인식 및 요구 탐색:  한국장애인고용공단 맞춤훈련을 중심으로</a>
+      <p class="sum">한국장애인고용공단의 맞춤훈련을 중심으로 기업이 장애인 직업능력개발훈련을 인식·활용하는 방식과 효과, 제약, 개선 요구를 맞춤훈련 약정 기업 담당자 10명 심층면담을 통해 분석한 연구이다. 기업들은 전반적으로 높은 만족도를 보였으나 동일 직무 5인 이상 최소 인원 기준, 4~5주 훈련 기간, 훈련 내용과 실무 간 괴리를 주요 장벽으로 지적했고, 근무 태도·직장 적응에는 긍정적이나 직무역량 향상은 제한적이었다. 이를 바탕으로 기업을 능동적 파트너로 보는 관점 전환과 직무 정합성 강화, 다차원 성과 지표 도입, 디지털 전환 대응 훈련 다양화, 사후 지원 체계화를 제언했다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#직업능력개발훈련</span>
+      <span class="tag">#맞춤훈련</span>
+      <span class="tag">#한국장애인고용공단</span>
+      <span class="tag">#직업재활</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(장애인고용)</span> · <span class="when" data-date="2026-07-20"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://doi.org/10.23265/KSDS.2026.06.30.10">
+    <div class="post-body">
+      <a href="https://doi.org/10.23265/KSDS.2026.06.30.10" target="_blank">장애인직업재활시설에서의 노동 소외와 비물질 노동의 대안적 노동 가능성 검토: 마르크스의 노동 소외론을 중심으로</a>
+      <p class="sum">(제목 기준) 마르크스의 노동 소외론을 바탕으로 장애인직업재활시설에서 발생하는 노동 소외 문제를 분석한 연구이다. 비물질 노동이 장애인에게 대안적 노동 형태로 기능할 수 있는지 그 가능성을 검토한다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인직업재활</span>
+      <span class="tag">#노동소외</span>
+      <span class="tag">#비물질노동</span>
+      <span class="tag">#마르크스</span>
+      <span class="tag">#직업재활시설</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(직업재활)</span> · <span class="when" data-date="2026-07-08"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://doi.org/10.22779/kadw.2026.72.72.171">
+    <div class="post-body">
+      <a href="https://doi.org/10.22779/kadw.2026.72.72.171" target="_blank">성과로 재정의된 직업재활 : WIOA와 미국 장애인 직업재활 체계의 제도 전환</a>
+      <p class="sum">이 연구는 2014년 노동력 혁신 및 기회법(WIOA) Title IV를 통해 연방 인력개발 체계로 통합된 미국 장애인 직업재활(VR) 체계의 제도적 전환을 노동시장 수요 중심 논리와 성과 거버넌스라는 틀로 분석했다. 분석 결과 수요 기반 체계는 개인 중심 재활 원리와 긴장을 형성하고, 공통 성과 지표는 취업 속도·규모 중심으로 수렴되며, 경쟁적 통합 고용(CIE)의 법적 명문화는 소득 안정성·지원 체계와 분리된 구조를 보였다. 저자는 이러한 두 논리의 결합이 직업재활 운영 논리를 규정하며 한국 직업재활 정책 논의에도 시사점을 준다고 제시한다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#직업재활</span>
+      <span class="tag">#WIOA</span>
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#성과거버넌스</span>
+      <span class="tag">#경쟁적통합고용</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(직업재활)</span> · <span class="when" data-date="2026-06-30"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType01.do?bid=38&amp;mid=226&amp;cmd=_view&amp;idx=39963">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType01.do?bid=38&amp;mid=226&amp;cmd=_view&amp;idx=39963" target="_blank">주요국 지원고용 비교, 한국형 지원고용의 현장훈련 강점을 고용유지로 확장한다</a>
+      <p class="sum">한국장애인고용공단 고용개발원의 이슈 브리프로, 미국·영국·호주·독일·프랑스·일본·한국의 지원고용 제도를 비교분석하였다. 한국형 지원고용의 현장훈련 강점을 고용유지로 확장하는 방안 등 정책적 발전 방향과 시사점을 제시하였다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#지원고용</span>
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#직업재활</span>
+      <span class="tag">#국제비교</span>
+      <span class="tag">#고용유지</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-06-30"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType01.do?bid=44&amp;mid=236&amp;cmd=_view&amp;idx=39965">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType01.do?bid=44&amp;mid=236&amp;cmd=_view&amp;idx=39965" target="_blank">&lt;세계장애동향&gt;2026-3호(통권90호)</a>
+      <p class="sum">한국장애인고용공단 고용개발원이 발행한 「세계장애동향」 2026-3호(통권90호)로, &#039;각국의 장애인 고용서비스 전달체계&#039;를 주제로 다룬다. 일본, 프랑스, 미국, 호주의 장애인 고용서비스 전달체계와 기관별 역할, 연방-주-지역사회 협력모델 등 해외 사례를 소개한다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#세계장애동향</span>
+      <span class="tag">#고용서비스전달체계</span>
+      <span class="tag">#해외장애정책</span>
+      <span class="tag">#직업재활</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-06-30"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://www.koddi.or.kr/data/research01_view.jsp?brdNum=7429361&amp;brdTp=RSH02&amp;searchParamUrl=brdRshYnData%3Ddata%26amp%3BpageSize%3D100%26amp%3BbrdTp%3DRSH02%26amp%3BbrdType%3DRSH%26amp%3Bpage%3D1">
+    <div class="post-body">
+      <a href="https://www.koddi.or.kr/data/research01_view.jsp?brdNum=7429361&amp;brdTp=RSH02&amp;searchParamUrl=brdRshYnData%3Ddata%26amp%3BpageSize%3D100%26amp%3BbrdTp%3DRSH02%26amp%3BbrdType%3DRSH%26amp%3Bpage%3D1" target="_blank">[2025]중증장애인직업재활지원사업-장애인일자리사업 연계를 통한 중증장애인 자립지원방안 연구</a>
+      <p class="sum">한국장애인개발원이 발행한 2025년 연구보고서로, 중증장애인직업재활지원사업과 장애인일자리사업의 개선 및 사업 간 연계방안을 마련하는 것을 목적으로 한다. 사업현황 분석, 해외 사례, 온라인 설문조사, FGI 등을 통해 중증장애인 자립지원 통합지원체계 구축과 소득보장, 일자리사업 중장기 개편방안 등의 정책 제언을 담고 있다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#중증장애인</span>
+      <span class="tag">#직업재활</span>
+      <span class="tag">#장애인일자리</span>
+      <span class="tag">#자립지원</span>
+      <span class="tag">#한국장애인개발원</span>
+    </div>
+    <div class="meta-foot"><span class="who">KODDI-직업재활연구보고서</span> · <span class="when" data-date="2026-06-01"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://doi.org/10.15707/disem.2026.36.2.011">
+    <div class="post-body">
+      <a href="https://doi.org/10.15707/disem.2026.36.2.011" target="_blank">장애인고용촉진 및 직업재활법에 근거한 자치법규의 정합성과 자치성 분석</a>
+      <p class="sum">장애인고용촉진 및 직업재활법을 근거로 시행 중인 97개 자치법규를 대상으로 6개 조항·10개 세부항목의 자치단체 책무성에 대한 정합성과 자치성을 분석한 연구이다. 정합성은 제3조·제27조가 높고 제14조·제24조가 낮았으며, 경기도·인천 등 일부 지자체에서 차별화된 자치성 항목이 확인되었다. 연구는 자치단체 책무성 강화, 장애인고용법 개정, 자치법규 제정 확대와 재정지원 강화 등을 제언하였다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#직업재활</span>
+      <span class="tag">#자치법규</span>
+      <span class="tag">#장애인고용법</span>
+      <span class="tag">#지방자치</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(장애인고용)</span> · <span class="when" data-date="2026-05-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://doi.org/10.15707/disem.2026.36.2.002">
+    <div class="post-body">
+      <a href="https://doi.org/10.15707/disem.2026.36.2.002" target="_blank">장애인의 분절된 노동시장과 노동이동 분석: 장애인고용패널조사자료를 중심으로</a>
+      <p class="sum">장애인고용패널조사 자료를 활용해 우리나라 노동시장의 이중구조를 장애인의 노동이동성 측면에서 분석한 연구이다. 고용형태와 기업규모 기준으로 노동시장을 네 유형으로 세분한 결과, 비정규직에서 정규직으로의 이동성과 중소기업에서 대기업으로의 이동이 지난 8년간 감소했고, 근로여건이 양호한 일자리로 이동해도 임금 상승은 뚜렷하지 않았다. 장애인 고용시장이 다층적으로 분절되어 있으며 시간이 지날수록 그 구조가 고착화되고 있음을 확인했다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#노동시장이중구조</span>
+      <span class="tag">#노동이동</span>
+      <span class="tag">#분절된노동시장</span>
+      <span class="tag">#비정규직</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(장애인고용)</span> · <span class="when" data-date="2026-05-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=39446">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType16.do?bid=17&amp;mid=34&amp;cmd=_view&amp;idx=39446" target="_blank">코로나19 팬데믹이 장애인과 여성의 임금 변화에 미친 영향</a>
+      <p class="sum">김민호의 연구는 코로나19 팬데믹이 장애인과 여성의 임금 변화에 미친 영향을 경제적 회복력 관점에서 실증적으로 분석하였다. 취약성 및 회복력 이론을 토대로 경제적 충격이 취약계층의 구조적 불평등을 심화시키는 기제로 작용하였는지를 검증하고자 하였다. 학술지 「장애와 고용」 제36권 제2호에 게재되었다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#코로나19</span>
+      <span class="tag">#장애인임금</span>
+      <span class="tag">#여성임금</span>
+      <span class="tag">#경제적회복력</span>
+      <span class="tag">#구조적불평등</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2026-05-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://doi.org/10.23414/kasws.2018.3..001">
+    <div class="post-body">
+      <a href="https://doi.org/10.23414/kasws.2018.3..001" target="_blank">직업재활시설 슈퍼비전에 관한 질적 사례연구 - M직업재활센터 사례를 중심으로 -</a>
+      <p class="sum">직업재활시설의 슈퍼비전 체계 정립을 목적으로 M직업재활센터의 2016~2018년 슈퍼비전 기록과 종사자 4명 인터뷰를 분석한 질적 사례연구이다. 직업재활시설은 생산성과 복지성을 동시에 추구하는 특성상 인력·재정·제도적 제약으로 무형식 슈퍼비전을 수행하며, 교육·고용·복지를 통합하는 역량 강화 슈퍼비전이 필요한 것으로 나타났다. 현실적 문제로 슈퍼바이저와 슈퍼바이지 모두 소진되어 있으나 지지적 슈퍼비전은 직무만족도와 역량강화에 도움을 주는 것으로 확인되었다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#직업재활시설</span>
+      <span class="tag">#슈퍼비전</span>
+      <span class="tag">#직업재활</span>
+      <span class="tag">#종사자역량강화</span>
+      <span class="tag">#직무만족</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(직업재활)</span> · <span class="when" data-date="2026-05-24"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://doi.org/10.21186/IPR.2026.11.1.255">
+    <div class="post-body">
+      <a href="https://doi.org/10.21186/IPR.2026.11.1.255" target="_blank">장애인직업재활 분야에 관한 질적연구 동향 분석</a>
+      <p class="sum">2019년 11월부터 2025년까지 국내 학술지에 게재된 장애인 직업재활 관련 질적연구 66편을 연구 주제, 참여자 특성, 적용 방법, 자료수집·분석 절차 중심으로 체계적으로 분석한 연구이다. 초고령사회, 저출생, 4차 산업혁명, 코로나19 등 구조적 변화 속에서 장애인과 종사자의 경험·인식·의미를 탐색하는 다학제적 주제가 확대되고 방법론적 성숙이 이루어졌음을 확인하였다. 이를 바탕으로 향후 학술·정책·실천·윤리적 기반 강화의 필요성을 제언하였다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인직업재활</span>
+      <span class="tag">#질적연구</span>
+      <span class="tag">#연구동향분석</span>
+      <span class="tag">#직업재활시설</span>
+      <span class="tag">#장애인고용</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(직업재활)</span> · <span class="when" data-date="2026-02-09"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003282081">
+    <div class="post-body">
+      <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003282081" target="_blank">장애인고용의무제 인지도와 장애인정책 신뢰도가 장애인의 경제활동 참여에 미치는 영향 -자기효능감의 매개경로분석-</a>
+      <p class="sum">이 연구는 장애인고용패널 2차웨이브 7차(2022년) 자료 3,557명을 분석해 장애인고용의무제 인지도와 장애인정책 신뢰도가 경제활동 참여에 미치는 영향을 자기효능감의 매개경로 측면에서 검증하였다. 고용의무제 인지도는 경제활동에 직접·간접(자기효능감 매개) 모두 정의 영향을 미쳤고, 고용·교육정책 신뢰도는 자기효능감을 매개로 완전매개효과를 보인 반면 복지정책 신뢰도는 경제활동에 부의 영향을 나타냈다. 따라서 장애인 경제활동 증진을 위해 정책 인지도·신뢰도 제고와 함께 개인의 내적 자기효능감을 높이는 노력이 필요함을 시사한다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#장애인고용의무제</span>
+      <span class="tag">#정책신뢰도</span>
+      <span class="tag">#자기효능감</span>
+      <span class="tag">#장애인경제활동</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(장애인고용)</span> · <span class="when" data-date="2025-12-30"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType01.do?bid=21&amp;mid=49&amp;cmd=_view&amp;idx=38369">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType01.do?bid=21&amp;mid=49&amp;cmd=_view&amp;idx=38369" target="_blank">2025년 기업체장애인고용실태조사</a>
+      <p class="sum">한국장애인고용공단 고용개발원이 발간한 2025년 기업체장애인고용실태조사 보고서로, 전체 기업체의 장애인 고용 규모와 실태, 고용요인을 파악하기 위한 승인통계 조사 결과를 담고 있다. 상시근로자 1명 이상 기업체 대상 기본조사와 5명 이상 기업체 대상 심층조사를 2025년 6월부터 10월까지 CAPI·CATI 방식으로 실시했으며, 모집·채용, 업무환경, 교육훈련, 고용서비스 욕구, 직업훈련 수요 등을 분석했다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#기업체고용실태조사</span>
+      <span class="tag">#고용통계</span>
+      <span class="tag">#직업재활</span>
+      <span class="tag">#한국장애인고용공단</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2025-12-30"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://doi.org/10.15300/jcw.2025.95.4.209">
+    <div class="post-body">
+      <a href="https://doi.org/10.15300/jcw.2025.95.4.209" target="_blank">장애인고용업체종사자의 장애인식이 조직몰입을 매개로 직무만족에 미치는 영향 - 사회복지시설과 일반사업체 비교 중심으로 -</a>
+      <p class="sum">제주지역에서 장애인을 1인 이상 고용한 사회복지시설과 일반사업체의 비장애인 종사자 267명을 대상으로, 부정적 장애인식이 조직몰입을 매개로 직무만족에 미치는 영향을 비교 분석한 연구이다. 사회복지시설 종사자는 일반사업체보다 부정적 장애인식 수준이 낮았고, 이 집단에서는 부정적 장애인식이 낮을수록 조직몰입과 직무만족이 높아지는 부분 매개효과가 확인된 반면 일반사업체에서는 조직몰입의 매개효과가 유의하지 않았다. 연구는 조직 유형별 특성을 고려한 장애인식 개선 교육과 직무지원 체계, 근로환경 조성 등의 실천전략 필요성을 제언하였다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#장애인식개선</span>
+      <span class="tag">#조직몰입</span>
+      <span class="tag">#직무만족</span>
+      <span class="tag">#직업재활</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(장애인고용)</span> · <span class="when" data-date="2025-11-30"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://edi.kead.or.kr/BoardType01.do?bid=44&amp;mid=236&amp;cmd=_view&amp;idx=37315">
+    <div class="post-body">
+      <a href="https://edi.kead.or.kr/BoardType01.do?bid=44&amp;mid=236&amp;cmd=_view&amp;idx=37315" target="_blank">&lt;세계장애동향&gt;2025-5호(통권86호)</a>
+      <p class="sum">한국장애인고용공단 고용개발원이 발행한 &lt;세계장애동향&gt; 2025-5호(통권86호)로, 각국 대기업의 장애인 고용 현황과 동향을 다룬다. 독일의 대기업 장애인 고용 사례, 미국 기업의 장애인 고용과 사회적 책임(CSR) 경영 전략, 호주의 대기업 장애인 고용 현황 및 정책 동향을 소개한다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인고용</span>
+      <span class="tag">#세계장애동향</span>
+      <span class="tag">#대기업고용</span>
+      <span class="tag">#CSR</span>
+      <span class="tag">#해외정책동향</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-고용개발원 보고서</span> · <span class="when" data-date="2025-10-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003237293">
+    <div class="post-body">
+      <a href="https://www.kci.go.kr/kciportal/ci/sereArticleSearch/ciSereArtiView.kci?sereArticleSearchBean.artiId=ART003237293" target="_blank">디지털치료제를 활용한 직업재활 중재가 발달장애인의 사회기술에 미치는 영향: 체계적 고찰</a>
+      <p class="sum">디지털치료제(주로 VR 기반)를 활용한 직업재활 중재가 발달장애인의 사회기술에 미치는 영향을 PRISMA 가이드라인에 따라 최근 10년간 문헌 8편을 체계적으로 고찰한 연구이다. VR-JIT, Workplace VR, VRESS, VR 바리스타 프로그램 등이 확인되었으며, 면접기술·자신감·자기효능감·의사소통·직무 수행능력 및 직무 지식·기술·태도 습득 등에 긍정적 효과가 나타났다. 향후 작업치료 관점에서 디지털치료제 기반 직업재활의 효과 검증 연구가 필요하다고 제언했다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#발달장애인</span>
+      <span class="tag">#직업재활</span>
+      <span class="tag">#디지털치료제</span>
+      <span class="tag">#가상현실훈련</span>
+      <span class="tag">#사회기술</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(직업재활)</span> · <span class="when" data-date="2025-08-31"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+  <div class="jobnews-item" data-url="https://doi.org/10.21186/IPR.2025.10.3.039">
+    <div class="post-body">
+      <a href="https://doi.org/10.21186/IPR.2025.10.3.039" target="_blank">장애인근로사업장 HACCP의 직업재활적 성과에 대한 관리자 인식</a>
+      <p class="sum">이 연구는 질적 사례연구 방법으로 장애인 근로사업장의 HACCP 시스템 인증 유지가 발달장애인 생산 식품의 품질 개선과 수익 창출에 기여하는지를 관리자 인식을 통해 규명했다. 분석 결과 HACCP 인증 유지는 중증장애인 생산 식품의 소비 활성화와 매출 증대 수단으로 기능하며, 발달장애인에 대한 안정적 임금 지급과 복리후생 지원을 가능하게 해 자립적 삶의 기반이 됨을 확인했다. 이를 통해 HACCP 인증이 중증장애인 생산품 저변 확대의 한계를 극복하고 경제적 자립 가능성을 높일 수 있다고 제언했다.</p>
+    </div>
+    <div class="tagwrap">
+      <span class="tag">#장애인근로사업장</span>
+      <span class="tag">#HACCP</span>
+      <span class="tag">#직업재활</span>
+      <span class="tag">#발달장애인</span>
+      <span class="tag">#중증장애인생산품</span>
+    </div>
+    <div class="meta-foot"><span class="who">데이터포털-KCI 논문(직업재활)</span> · <span class="when" data-date="2025-08-07"></span></div>
+    <div class="actions">
+      <button class="share-btn">📤 <span class="label">공유</span></button>
+      <button class="save-btn" style="margin-left:auto">🔖 <span class="label">저장</span></button>
+    </div>
+  </div>
+</div>
+<div class="empty" id="researchEmpty">검색 결과가 없습니다.</div>
+
 
   <script>
     var SAVE_KEY = 'jobnews_saved_v1';
     function getSaved() { try { return JSON.parse(localStorage.getItem(SAVE_KEY) || '[]'); } catch (e) { return []; } }
     function setSaved(arr) { try { localStorage.setItem(SAVE_KEY, JSON.stringify(arr)); } catch (e) {} }
+
+    // "전체" 탭: 뉴스+연구자료를 날짜순으로 합쳐서 미리 만들어 둠(이후 초기화 로직이 통째로 같이 처리)
+    (function buildAllTab() {
+      var newsItems = Array.prototype.slice.call(document.getElementById('jobnewsList').children);
+      var researchItems = Array.prototype.slice.call(document.getElementById('researchList').children);
+      var all = newsItems.concat(researchItems).map(function (el) { return el.cloneNode(true); });
+      all.sort(function (a, b) {
+        var whenA = a.querySelector('.when'), whenB = b.querySelector('.when');
+        var da = whenA ? whenA.getAttribute('data-date') || '' : '';
+        var db = whenB ? whenB.getAttribute('data-date') || '' : '';
+        if (da === db) return 0;
+        return da < db ? 1 : -1;
+      });
+      var allList = document.getElementById('allList');
+      all.forEach(function (el) { allList.appendChild(el); });
+    })();
 
     document.querySelectorAll('.when').forEach(function (el) {
       var date = el.getAttribute('data-date');
@@ -182,16 +878,16 @@
         var url = item.dataset.url;
         var saved = getSaved();
         var idx = saved.indexOf(url);
-        if (idx > -1) {
-          saved.splice(idx, 1);
-          btn.classList.remove('saved');
-          btn.innerHTML = '🔖 <span class="label">저장</span>';
-        } else {
-          saved.push(url);
-          btn.classList.add('saved');
-          btn.innerHTML = '📑 <span class="label">저장됨</span>';
-        }
+        var nowSaved = idx === -1;
+        if (nowSaved) { saved.push(url); } else { saved.splice(idx, 1); }
         setSaved(saved);
+        // 같은 글이 "전체" 탭과 개별 탭에 중복 존재 — 데이터 url이 같은 모든 카드의 버튼을 함께 갱신
+        document.querySelectorAll('.jobnews-item').forEach(function (it) {
+          if (it.dataset.url !== url) return;
+          var b = it.querySelector('.save-btn');
+          b.classList.toggle('saved', nowSaved);
+          b.innerHTML = nowSaved ? '📑 <span class="label">저장됨</span>' : '🔖 <span class="label">저장</span>';
+        });
         if (savedOnly) jobnewsFilter();
       });
     });
@@ -240,6 +936,22 @@
       jobnewsFilter();
     });
 
+    var activeTab = 'all';
+    var LIST_ID = { all: 'allList', news: 'jobnewsList', research: 'researchList' };
+    var EMPTY_ID = { all: 'allEmpty', news: 'jobnewsEmpty', research: 'researchEmpty' };
+    document.querySelectorAll('.tab-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        activeTab = btn.dataset.tab;
+        Object.keys(LIST_ID).forEach(function (tab) {
+          document.getElementById(LIST_ID[tab]).style.display = activeTab === tab ? '' : 'none';
+        });
+        document.getElementById('jobnewsSearch').value = '';
+        jobnewsFilter();
+      });
+    });
+
     function highlight(text, input) {
       if (!input) return text;
       var idx = text.toLowerCase().indexOf(input.toLowerCase());
@@ -250,7 +962,9 @@
     function jobnewsFilter() {
       var input = document.getElementById('jobnewsSearch').value.toLowerCase();
       var saved = getSaved();
-      var items = document.getElementById('jobnewsList').getElementsByClassName('jobnews-item');
+      var listEl = document.getElementById(LIST_ID[activeTab]);
+      var emptyEl = document.getElementById(EMPTY_ID[activeTab]);
+      var items = listEl.getElementsByClassName('jobnews-item');
       var visibleCount = 0;
       for (var i = 0; i < items.length; i++) {
         var item = items[i];
@@ -271,7 +985,7 @@
           sumEl.textContent = sumOrig;
         }
       }
-      document.getElementById('jobnewsEmpty').style.display = visibleCount === 0 ? 'block' : 'none';
+      emptyEl.style.display = visibleCount === 0 ? 'block' : 'none';
     }
     document.getElementById('jobnewsSearch').addEventListener('keyup', jobnewsFilter);
     document.getElementById('jobnewsSearchBtn').addEventListener('click', jobnewsFilter);
