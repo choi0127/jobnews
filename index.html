@@ -6,6 +6,24 @@
 <title>장애인 일자리 뉴스</title>
 <style>
   body{font-family:'맑은 고딕',sans-serif;margin:0;padding:0 0 30px;background:#fafafa;color:#1a2330}
+  .hero{background:linear-gradient(120deg,#eaf2fb 0%,#e6f0fa 45%,#e3efe8 100%);color:#123a63;padding:40px 20px 44px;border-bottom:1px solid #e3e9f0}
+  .hero-inner{max-width:900px;margin:0 auto}
+  .hero h1{font-size:25px;line-height:1.45;margin:0 0 10px;font-weight:800;color:#123a63}
+  .hero-sub{font-size:13.5px;color:#5a6472;margin:0 0 20px}
+  .hero-search{position:relative;max-width:520px}
+  .hero-search input{width:100%;padding:14px 46px 14px 18px;font-size:14.5px;border:1px solid #d7e2f0;border-radius:26px;box-sizing:border-box;font-family:inherit;background:#fff}
+  .hero-search .search-icon{position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:17px;color:#888;cursor:pointer}
+  .hero-keywords{margin-top:16px;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+  .hero-kw-label{font-size:12px;color:#8a94a3;margin-right:4px}
+  .hero-keywords .tag{background:#fff;color:#2e6fc0;border-color:#d7e2f0}
+  .hero-keywords .tag:hover{background:#eef3fc}
+  .stats-row{max-width:900px;margin:-24px auto 0;padding:0 20px 10px;display:flex;gap:14px;position:relative;z-index:2;flex-wrap:wrap}
+  .stat-card{flex:1;min-width:150px;background:#fff;border:1px solid #eee;border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.08);transition:transform .15s ease,box-shadow .15s ease;text-align:left;font-family:inherit}
+  .stat-card:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.12)}
+  .stat-icon{width:42px;height:42px;border-radius:12px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex:0 0 auto}
+  .stat-label{font-size:12.5px;color:#8a94a3;font-weight:700}
+  .stat-num{font-size:21px;font-weight:800;color:#1a2330;margin:2px 0}
+  .stat-today{font-size:11px;color:var(--accent);font-weight:700}
   .topwrap{background:#fff;border-bottom:1px solid #eee;padding:14px 16px}
   .search-wrap{position:relative;max-width:900px;margin-bottom:10px;display:flex;gap:8px}
   .search-inputbox{position:relative;flex:1}
@@ -16,6 +34,8 @@
   .tabs{display:flex;gap:6px;max-width:900px}
   .tab-btn{border:0;background:none;padding:8px 14px;font-size:14px;font-weight:700;color:#8a94a3;cursor:pointer;border-bottom:3px solid transparent}
   .tab-btn.active{color:#123a63;border-bottom-color:#123a63}
+  .tab-count{font-size:11.5px;font-weight:700;color:#aeb6c2;margin-left:3px}
+  .tab-btn.active .tab-count{color:#5a86bd}
   .wrap{max-width:900px;margin:14px auto 0;padding:0 10px}
   .jobnews-item{background:#fff;border:1px solid #efefef;border-radius:14px;margin-bottom:18px;overflow:hidden;transition:transform .15s ease,box-shadow .15s ease}
   .jobnews-item:hover,.jobnews-item:active{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.08)}
@@ -37,18 +57,53 @@
 </style>
 </head>
 <body>
-  <div class="topwrap">
-    <div class="search-wrap">
-      <div class="search-inputbox">
-        <input type="text" id="jobnewsSearch" placeholder="제목으로 검색해보세요">
+  <div class="hero">
+    <div class="hero-inner">
+      <h1>장애인 일자리의 오늘을 모아<br>내일의 변화를 기록합니다.</h1>
+      <p class="hero-sub">장애인 일자리와 관련된 뉴스·연구자료를 한곳에서 만나보세요.</p>
+      <div class="hero-search">
+        <input type="text" id="jobnewsSearch" placeholder="검색어를 입력해보세요. (예: 발달장애인, 근로지원인, 의무고용 등)">
         <span class="search-icon" id="jobnewsSearchBtn">🔍</span>
       </div>
+      <div class="hero-keywords">
+        <span class="hero-kw-label">많이 찾는 키워드</span>
+        <span class="tag">#발달장애인</span>
+        <span class="tag">#장애인고용</span>
+        <span class="tag">#직업재활</span>
+        <span class="tag">#의무고용</span>
+        <span class="tag">#중증장애인</span>
+        <span class="tag">#근로지원인</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <button class="stat-card" data-tab="news" style="--accent:#1a56c4">
+      <div class="stat-icon">📰</div>
+      <div>
+        <div class="stat-label">뉴스</div>
+        <div class="stat-num" id="statNewsCount">0건</div>
+        <div class="stat-today" id="statNewsToday">오늘 0건 신규</div>
+      </div>
+    </button>
+    <button class="stat-card" data-tab="research" style="--accent:#1c7e38">
+      <div class="stat-icon">📄</div>
+      <div>
+        <div class="stat-label">연구자료</div>
+        <div class="stat-num" id="statResearchCount">0건</div>
+        <div class="stat-today" id="statResearchToday">오늘 0건 신규</div>
+      </div>
+    </button>
+  </div>
+
+  <div class="topwrap">
+    <div class="search-wrap">
       <button class="saved-toggle" id="savedToggle">🔖 저장한 글만</button>
     </div>
     <div class="tabs">
-      <button class="tab-btn active" data-tab="all">🗂 전체</button>
-      <button class="tab-btn" data-tab="news">📰 뉴스</button>
-      <button class="tab-btn" data-tab="research">📄 연구자료</button>
+      <button class="tab-btn active" data-tab="all">🗂 전체<span class="tab-count"></span></button>
+      <button class="tab-btn" data-tab="news">📰 뉴스<span class="tab-count"></span></button>
+      <button class="tab-btn" data-tab="research">📄 연구자료<span class="tab-count"></span></button>
     </div>
   </div>
 
@@ -844,6 +899,50 @@
       var allList = document.getElementById('allList');
       all.forEach(function (el) { allList.appendChild(el); });
     })();
+
+    // 탭 라벨에 건수 표시 (자료 추가될 때마다 자동 반영)
+    (function fillTabCounts() {
+      var counts = {
+        all: document.getElementById('allList').children.length,
+        news: document.getElementById('jobnewsList').children.length,
+        research: document.getElementById('researchList').children.length
+      };
+      document.querySelectorAll('.tab-btn').forEach(function (btn) {
+        var c = counts[btn.dataset.tab];
+        var span = btn.querySelector('.tab-count');
+        if (span && typeof c === 'number') span.textContent = '(' + c + ')';
+      });
+    })();
+
+    // 상단 통계 카드(뉴스/연구자료) 숫자 채우기 — 오늘 신규는 data-date가 "오늘"인 것만 집계
+    (function fillStats() {
+      function countToday(containerId) {
+        var items = document.getElementById(containerId).getElementsByClassName('jobnews-item');
+        var n = 0;
+        for (var i = 0; i < items.length; i++) {
+          var w = items[i].querySelector('.when');
+          if (!w) continue;
+          var d = new Date(w.getAttribute('data-date'));
+          var diffDays = Math.floor((new Date().setHours(0,0,0,0) - d.setHours(0,0,0,0)) / 86400000);
+          if (diffDays === 0) n++;
+        }
+        return n;
+      }
+      var newsTotal = document.getElementById('jobnewsList').children.length;
+      var researchTotal = document.getElementById('researchList').children.length;
+      document.getElementById('statNewsCount').textContent = newsTotal.toLocaleString() + '건';
+      document.getElementById('statResearchCount').textContent = researchTotal.toLocaleString() + '건';
+      document.getElementById('statNewsToday').textContent = '오늘 ' + countToday('jobnewsList') + '건 신규';
+      document.getElementById('statResearchToday').textContent = '오늘 ' + countToday('researchList') + '건 신규';
+    })();
+
+    document.querySelectorAll('.stat-card').forEach(function (card) {
+      card.addEventListener('click', function () {
+        var tabBtn = document.querySelector('.tab-btn[data-tab="' + card.dataset.tab + '"]');
+        if (tabBtn) tabBtn.click();
+        document.querySelector('.topwrap').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
 
     document.querySelectorAll('.when').forEach(function (el) {
       var date = el.getAttribute('data-date');
